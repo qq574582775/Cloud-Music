@@ -1,6 +1,6 @@
 #include "player.h"
 #include <QDebug>
-
+//Music player
 Player::Player(QObject *parent) : QObject(parent)
 {
     connect(&m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
