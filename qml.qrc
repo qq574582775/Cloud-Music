@@ -16,5 +16,7 @@
         <file>ContentWindow/PlayControlWindow/MusicControlBtn.qml</file>
         <file>ContentWindow/PlayControlWindow/PlaySlider.qml</file>
         <file>ContentWindow/Page/SearchPage.qml</file>
+        <file>FramelessWindow/SearchRect.qml</file>
+        <file>ContentWindow/Page/LocaMusicPage.qml</file>
     </qresource>
 </RCC>

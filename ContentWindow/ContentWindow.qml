@@ -25,7 +25,7 @@ Page{
         anchors.top: parent.top;
         anchors.right: parent.right
         anchors.bottom: footer_.top;
-        source: "qrc:/ContentWindow/Page/SearchPage.qml";
+        source: "qrc:/ContentWindow/Page/LocaMusicPage.qml";
         }
 
     PlayControlWindow{

@@ -13,12 +13,12 @@ Rectangle {
 
     ListModel{
         id:navbarListmodel
-        ListElement{
-            type:"推荐"
-            symbolText_:"\uf002"
-            itemText_:"搜索"
-            fontfamily_:"Solid"
-        }
+//        ListElement{
+//            type:"推荐"
+//            symbolText_:"\uf002"
+//            itemText_:"搜索"
+//            fontfamily_:"Solid"
+//        }
         ListElement{
             type:"推荐"
             symbolText_:"\uf001"

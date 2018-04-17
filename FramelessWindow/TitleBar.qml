@@ -115,23 +115,47 @@ Rectangle{
             onActiveFocusChanged: {
                 if(activeFocus)
                 {
-                    if(text.length===0)
+                    if(text.length===0){
                         searchDlg.open();
+                        icon_SearchRect.visible = true;
+                        console.log("open")
+                    }
                 }
-                else
+                else{
                     searchDlg.close();
+                    icon_SearchRect.visible = false;
+                    console.log("close")
+                }
             }
 
-//            Popup{
-//                topMargin: searchBar.height+10*dp;
-//                id:searchDlg;
-//                visible: false;
-//                background: Loader{
-//                    source: "qrc:/qml/TitleBar/SearchRect.qml";
-//                }
-//                //onClosed: searchText.focus=false;
+//            onTextChanged: {
+//                    if(text.length>0){
+//                        searchDlg.close();
+//                        console.log("close")
+//                    }
+//                    else{
+//                        searchDlg.open();
+//                        console.log("open")
+//                    }
 //            }
+
+            Label{
+                id:icon_SearchRect
+                visible: false
+                anchors{
+                    top:parent.bottom
+                    left: parent.left
+                    leftMargin: 12*dp
+                }
+                height: 12*dp
+                width: height
+                color: "#ffffff"
+                text: "\uf0d8";
+                font.family: icomoonFont.name
+                font.pixelSize: 16*dp;
+            }
         }
+
 
         Label{
             font.family: icomoonFont.name
@@ -148,7 +172,21 @@ Rectangle{
 
         }
 
+        Popup{
+            topMargin: titleBar.height+1*dp;
+            id:searchDlg;
+            //visible: false;
+            width: searchTextEdit.width*1.5;
+            height: 300*dp
+            background: Loader{
+                source: "qrc:/FramelessWindow/SearchRect.qml";
+            }
+            onClosed: textEdit.focus=false;
+        }
 
+
+        Component.onCompleted:{
+            searchDlg.close();}
 
     }
     //最小化
