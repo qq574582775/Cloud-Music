@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>FramelessWindow/CustomMouseArea.qml</file>
+        <file>FramelessWindow/FramelessWindow.qml</file>
+        <file>FramelessWindow/TitleBar.qml</file>
+        <file>Font/Font Awesome 5 Free-Solid-900.otf</file>
+        <file>images/logo.ico</file>
+        <file>images/logo.png</file>
+        <file>ContentWindow/ContentWindow.qml</file>
+        <file>ContentWindow/NavigationBar/NavBarBtn.qml</file>
+        <file>ContentWindow/NavigationBar/NavigationBar.qml</file>
+        <file>Font/Font Awesome 5 Free-Regular-400.otf</file>
+        <file>ContentWindow/PlayControlWindow/PlayControlWindow.qml</file>
+        <file>ContentWindow/PlayControlWindow/MusicRoundButton.qml</file>
+        <file>ContentWindow/PlayControlWindow/MusicControlBtn.qml</file>
+        <file>ContentWindow/PlayControlWindow/PlaySlider.qml</file>
+        <file>ContentWindow/Page/SearchPage.qml</file>
+    </qresource>
+</RCC>
