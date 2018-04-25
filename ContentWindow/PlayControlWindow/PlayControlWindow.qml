@@ -141,8 +141,14 @@ Rectangle{
         MouseArea{
             anchors.fill: parent
             onClicked:{
-                console.log("2")
+                volumeControlPopup.open();
             }
+        }
+        onActiveFocusChanged: {
+            if(activeFocus|| volumeControlPopup.activeFocus)
+                volumeControlPopup.open();
+            else
+                volumeControlPopup.close();
         }
     }
 
@@ -164,6 +170,17 @@ Rectangle{
             onClicked:{
                 console.log("1")
             }
+        }
+    }
+
+    Popup{
+        y:(border__.y-height-5*dp)
+        x:(volumeBtn.x+volumeBtn.width/2 - width/9*3)
+        id:volumeControlPopup;
+        width: 150*dp
+        height: 40*dp
+        background: Loader{
+            source: "qrc:/ContentWindow/PlayControlWindow/VolumeControlDlg.qml";
         }
     }
 

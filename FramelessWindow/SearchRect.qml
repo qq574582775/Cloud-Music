@@ -15,6 +15,7 @@ Rectangle {
         id: rectangle
         height: 33
         color: "#ffffff"
+        z: 1
         border.width: 1
         border.color: "#f0f0f0"
         anchors.right: parent.horizontalCenter
@@ -66,6 +67,7 @@ Rectangle {
     Rectangle {
         id: rectangle2
         color: "#ffffff"
+        z: 1
         border.color: "#f0f0f0"
         anchors.bottom: rectangle.bottom
         anchors.bottomMargin: 0

@@ -18,5 +18,7 @@
         <file>ContentWindow/Page/SearchPage.qml</file>
         <file>FramelessWindow/SearchRect.qml</file>
         <file>ContentWindow/Page/LocaMusicPage.qml</file>
+        <file>ContentWindow/PlayControlWindow/VolumeControlDlg.qml</file>
+        <file>images/volumeBorder.png</file>
     </qresource>
 </RCC>

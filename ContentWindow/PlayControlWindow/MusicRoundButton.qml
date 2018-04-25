@@ -6,13 +6,11 @@ Rectangle{
     id:button
     width: 70*dp
     height:width
-    //height: btn_label.height*1.1
     signal clicked()
     property alias text:btn_label.text;
     property string secondText: "";
     property color btnColor: "#DC2F2E";
 
-    //color : active?"red":"blue"
     color: btnColor
     radius:width/2
     border.width: 2
@@ -39,9 +37,6 @@ Rectangle{
             button.clicked();
         }
     }
-
-
-
 
 }
 

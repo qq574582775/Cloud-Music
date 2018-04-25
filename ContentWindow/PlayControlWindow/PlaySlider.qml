@@ -6,13 +6,16 @@ import QtQuick.Layouts 1.3
 
 
 Rectangle{
+    property bool nolabel: true
     Slider {
         id: sliderControl;
+        z:1
         anchors.left: parent.left
         width: parent.width
         anchors.top:parent.top
         anchors.topMargin: parent.height/9*2
         anchors.bottom: parent.bottom
+
 
         background: Rectangle {
             x: sliderControl.leftPadding
@@ -83,6 +86,7 @@ Rectangle{
 
     Label{
         id:songInfo
+        visible: nolabel
         text: "if you - bigbang"
         anchors{
             left: sliderControl.left
@@ -104,6 +108,7 @@ Rectangle{
 
     Label{
         id:songTimeInfo
+        visible: nolabel
         text: "01:12 : 03:30"
         width: 60*dp
         anchors{

@@ -113,7 +113,7 @@ Rectangle{
             }
 
             onActiveFocusChanged: {
-                if(activeFocus)
+                if(activeFocus || searchDlg.activeFocus)
                 {
                     if(text.length===0){
                         searchDlg.open();
