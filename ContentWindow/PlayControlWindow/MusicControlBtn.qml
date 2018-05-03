@@ -13,6 +13,7 @@ Rectangle{
         anchors.fill: parent
         font.family: icomoonFont.name
         font.pixelSize: 15*dp;
+        text: "\uf192";
         verticalAlignment:Label.AlignVCenter;
         horizontalAlignment: Label.AlignHCenter;
         color: "#999999"
