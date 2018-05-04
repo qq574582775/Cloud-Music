@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
-import qt.Player 1.0
+
 import "FramelessWindow"
 
 ApplicationWindow {
@@ -16,9 +16,6 @@ ApplicationWindow {
     height: 600*dp
     flags:Qt.FramelessWindowHint | Qt.Window;
 
-    Player{
-        id:music_player
-    }
 
     FontLoader{
         id:icomoonFont;

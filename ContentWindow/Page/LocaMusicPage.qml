@@ -1,10 +1,13 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.2
+import io.qt.CloudMusic 1.0
 
 Page {
     property int interval : 20*dp
 
+    //LocalMusicModel{}
     Rectangle{
         id: rectangle1
         anchors.fill: parent
@@ -208,6 +211,7 @@ Page {
                 MouseArea{
                     anchors.fill: parent
                     cursorShape: hovered ?  Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: selecttMusicDirDlg.open();
                 }
             }
 
@@ -251,5 +255,18 @@ Page {
                 }
             }
         }
+    }
+
+    FileDialog {
+        id: selecttMusicDirDlg
+        title: qsTr("选择音乐所在目录：")
+        selectFolder :true
+        onAccepted: {
+            console.log("You chose: " + selecttMusicDirDlg.fileUrls)
+        }
+        onRejected: {
+            console.log("onRejected" )
+        }
+        Component.onCompleted: visible = false
     }
 }
