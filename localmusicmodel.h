@@ -32,6 +32,7 @@ public slots:
 
 private:
     void parseMusicInfo(QString path);
+    void clearDb();
 
 private:
     ZPlay *player;

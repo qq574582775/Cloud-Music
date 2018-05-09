@@ -32,7 +32,7 @@ static void createTable()
         qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
     }
 
-    query.exec("INSERT INTO LocalMusicInfo VALUES('title', 'singer', 'album', 123,'c://')");
+    //query.exec("INSERT INTO LocalMusicInfo VALUES('title', 'singer', 'album', 123,'c://')");
 }
 
 
@@ -135,6 +135,7 @@ void LocalMusicModel::parseMusicInfo(QString path)
         }
     }
 
+    clearDb();
 
     QSqlRecord newRecord = record();
     for(auto songItem : songRecords)
@@ -152,6 +153,21 @@ void LocalMusicModel::parseMusicInfo(QString path)
     }
 
     submitAll();//提交数据库
+}
+
+void LocalMusicModel::clearDb()
+{
+    if (!QSqlDatabase::database().tables().contains(localMusicTableName)) {
+        createTable();
+    }
+
+    QSqlQuery query;
+    QString sql_ = QStringLiteral("delete from [LocalMusicInfo]");
+
+    if (!query.exec(sql_)) {
+        qFatal("Failed to query database: %s", qPrintable(query.lastError().text()));
+    }
+    qDebug() << "clear table ok";
 }
 
 
