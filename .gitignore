@@ -1,2 +1,5 @@
 
 qml_music.pro.user
+*.vcxproj
+qml_music.vcxproj.filters
+qml_music.vcxproj.user

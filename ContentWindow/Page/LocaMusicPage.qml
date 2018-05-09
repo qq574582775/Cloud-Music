@@ -7,7 +7,7 @@ import io.qt.CloudMusic 1.0
 Page {
     property int interval : 20*dp
 
-    //LocalMusicModel{}
+    LocalMusicModel{id:localmusic;}
     Rectangle{
         id: rectangle1
         anchors.fill: parent
@@ -262,7 +262,8 @@ Page {
         title: qsTr("选择音乐所在目录：")
         selectFolder :true
         onAccepted: {
-            console.log("You chose: " + selecttMusicDirDlg.fileUrls)
+            localmusic.reloadMusicRecord(selecttMusicDirDlg.fileUrls);
+            //console.log("You chose: " + selecttMusicDirDlg.fileUrls)
         }
         onRejected: {
             console.log("onRejected" )
