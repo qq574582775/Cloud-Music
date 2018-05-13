@@ -1,12 +1,13 @@
 import QtQuick 2.7
+import QtQuick.Controls 1.4
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 import io.qt.CloudMusic 1.0
 
+
 Page {
     property int interval : 20*dp
-
     LocalMusicModel{id:localmusic;}
     Rectangle{
         id: rectangle1
@@ -170,9 +171,7 @@ Page {
             color: "#f0f0f0"
         }
 
-        Rectangle {
-            id: rectangle2
-            color: "#ffffff"
+        Rectangle{
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
@@ -182,78 +181,117 @@ Page {
             anchors.top: interval.bottom
             anchors.topMargin: 0
 
-
-
-
-            Button {
-                id: button
-                x: 232
-                y: 181
-                width: 240
-                height: 75
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
-                background: Rectangle{
-                    radius: 5
-                    color: button.hovered ?  "#1167A8" : "#0C73C2"
-                    Label{
-                        anchors.fill: parent
-                        text: qsTr("选择本地文件夹")
-                        color: "#ffffff"
-                        verticalAlignment:Label.AlignVCenter;
-                        horizontalAlignment: Label.AlignHCenter;
-                        font{
-                            family: "Microsoft YaHei";
-                            pixelSize: 20
+            Rectangle {
+                id: rectangle2
+                color: "#ffffff"
+                anchors.fill: parent
+                visible: (localmusic.m_musicNum === 0)
+                Button {
+                    id: button
+                    x: 232
+                    y: 181
+                    width: 240
+                    height: 75
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    background: Rectangle{
+                        radius: 5
+                        color: button.hovered ?  "#1167A8" : "#0C73C2"
+                        Label{
+                            anchors.fill: parent
+                            text: qsTr("选择本地文件夹")
+                            color: "#ffffff"
+                            verticalAlignment:Label.AlignVCenter;
+                            horizontalAlignment: Label.AlignHCenter;
+                            font{
+                                family: "Microsoft YaHei";
+                                pixelSize: 20
+                            }
                         }
                     }
+                    MouseArea{
+                        anchors.fill: parent
+                        cursorShape: hovered ?  Qt.PointingHandCursor : Qt.ArrowCursor
+                        onClicked: selecttMusicDirDlg.open();
+                    }
                 }
-                MouseArea{
-                    anchors.fill: parent
-                    cursorShape: hovered ?  Qt.PointingHandCursor : Qt.ArrowCursor
-                    onClicked: selecttMusicDirDlg.open();
+
+
+                Label {
+                    id: label
+                    x: 231
+                    y: 66
+                    width: 177
+                    height: 32
+                    text: qsTr("请选择本地音乐")
+                    font.bold: true
+                    anchors.bottom: label1.top
+                    anchors.bottomMargin: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    font{
+                        family: "Microsoft YaHei";
+                        pixelSize: 18
+                        bold: true;
+                    }
+
                 }
+
+                Label {
+                    id: label1
+                    x: 136
+                    y: 117
+                    width: 369
+                    height: 32
+                    text: qsTr("升级本地音乐为高品质并和朋友分享！")
+                    anchors.bottom: button.top
+                    anchors.bottomMargin: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    font{
+                        family: "Microsoft YaHei";
+                        pixelSize: 16
+                    }
+                }
+
             }
 
 
-            Label {
-                id: label
-                x: 231
-                y: 66
-                width: 177
-                height: 32
-                text: qsTr("请选择本地音乐")
-                font.bold: true
-                anchors.bottom: label1.top
-                anchors.bottomMargin: 20
-                anchors.horizontalCenter: parent.horizontalCenter
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font{
-                    family: "Microsoft YaHei";
-                    pixelSize: 18
-                    bold: true;
-                }
+            TableView{
+                id: tableview
+                anchors.fill: parent
+                visible: localmusic.m_musicNum >0
+                backgroundVisible: false;
+                frameVisible: false;
+                //itemDelegate: StandardTabelItemDelegate{} //添加自己喜欢的代理，这个就不用说了吧
+                //headerDelegate: headerDele;  //表头委托
+                //rowDelegate: rowDele;   //行委托
+                model: localmusic
 
+                TableViewColumn {
+                          role: "title"
+                          title: qsTr("标题")
+                          width: 300
+                      }
+                TableViewColumn {
+                          role: "singer"
+                          title: qsTr("歌手")
+                          width: 300
+                      }
+                TableViewColumn {
+                          role: "album"
+                          title: qsTr("专辑")
+                          width: 300
+                      }
+                TableViewColumn {
+                          role: "duration"
+                          title: qsTr("时长")
+                          width: 300
+                      }
             }
 
-            Label {
-                id: label1
-                x: 136
-                y: 117
-                width: 369
-                height: 32
-                text: qsTr("升级本地音乐为高品质并和朋友分享！")
-                anchors.bottom: button.top
-                anchors.bottomMargin: 20
-                anchors.horizontalCenter: parent.horizontalCenter
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font{
-                    family: "Microsoft YaHei";
-                    pixelSize: 16
-                }
-            }
         }
     }
 

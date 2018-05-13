@@ -5,3 +5,4 @@ Qt 5.9.4
 ![1](/snapshot/musicdemo.gif)
 ![2](/snapshot/3.gif)
 ![3](/snapshot/LocalMusicUI.gif)
+![4](/snapshot/4.gif)

@@ -20,6 +20,9 @@ struct songInfo
 class LocalMusicModel : public QSqlTableModel
 {
     Q_OBJECT
+    Q_PROPERTY(int m_musicNum READ musicNum WRITE setMusicNum NOTIFY musicNumChanged)
+
+
 
 public:
     explicit LocalMusicModel(QObject *parent = nullptr);
@@ -27,8 +30,14 @@ public:
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
     Q_INVOKABLE void reloadMusicRecord(const QString &path);
+    int musicNum(){return m_musicNum;}
+    void setMusicNum(int val){
+        m_musicNum = val;
+        emit musicNumChanged();
+    }
 
-public slots:
+signals:
+    void musicNumChanged();
 
 private:
     void parseMusicInfo(QString path);
@@ -36,6 +45,8 @@ private:
 
 private:
     ZPlay *player;
+    int m_musicNum = 0;
+
 };
 
 #endif // LOCALMUSICMODEL_H

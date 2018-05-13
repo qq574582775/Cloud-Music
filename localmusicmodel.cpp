@@ -46,7 +46,10 @@ LocalMusicModel::LocalMusicModel(QObject *parent)
      * 只有当我们执行提交修改后，才会真正写入数据库。当然这也是因为我们在最开始设置了它的保存策略：
     submitAll();   revertAll();*/
     setEditStrategy(QSqlTableModel::OnManualSubmit);
+    select();
     player = CreateZPlay();
+
+    setMusicNum(this->rowCount());
 }
 
 QVariant LocalMusicModel::data(const QModelIndex &index, int role) const
@@ -55,6 +58,31 @@ QVariant LocalMusicModel::data(const QModelIndex &index, int role) const
             return QSqlTableModel::data(index, role);
 
     const QSqlRecord sqlRecord = record(index.row());
+
+    //qDebug() << sqlRecord.value(role - Qt::UserRole);
+
+    switch (role) {
+    case Qt::UserRole:
+        if(sqlRecord.value(0).toString().isEmpty())
+        {
+            QString path = sqlRecord.value(role - Qt::UserRole + 4).toString();
+            path =  path.right(path.lastIndexOf('/'));
+            path.chop(4);
+            return  path.simplified();
+        }
+        break;
+    case Qt::UserRole+1:
+        if(sqlRecord.value(1).toString().isEmpty())
+            return tr("未知歌手");
+        break;
+    case Qt::UserRole+2:
+        if(sqlRecord.value(2).toString().isEmpty())
+            return tr("未知专辑");
+        break;
+    case Qt::UserRole+3:
+        int time = sqlRecord.value(3).toInt();
+        return QString("%1:%2").arg(time/60).arg(time%60,2,10,QChar('0'));
+    }
     return sqlRecord.value(role - Qt::UserRole);
 }
 
@@ -71,26 +99,6 @@ QHash<int, QByteArray> LocalMusicModel::roleNames() const
 
 void LocalMusicModel::reloadMusicRecord(const QString &path_)
 {
-//
-//    if(zplayer->OpenFile("f:\\music\\Justin Bieber-Love Yourself.mp3", sfAutodetect) == 0)
-//       {
-//          return;
-//       }
-//    zplayer->Play();
-
-//    QString path = path_.right(path_.length()-8);
-//    QDir dir(path);
-//    if(!dir.exists())
-//        return;
-
-//    QFileInfoList list = dir.entryInfoList();
-//    qDebug() << "     Bytes Filename";
-//    for (int i = 0; i < list.size(); ++i) {
-//      QFileInfo fileInfo = list.at(i);
-//      qDebug() << fileInfo.absoluteFilePath();
-
-//    }
-
     parseMusicInfo(path_);
 }
 
@@ -153,6 +161,7 @@ void LocalMusicModel::parseMusicInfo(QString path)
     }
 
     submitAll();//提交数据库
+    setMusicNum(songRecords.size());
 }
 
 void LocalMusicModel::clearDb()
@@ -169,38 +178,4 @@ void LocalMusicModel::clearDb()
     }
     qDebug() << "clear table ok";
 }
-
-
-
-//unsigned int sec=pInfo.Length.sec;
-//QString minute=sec/60>=10?QString::number(sec/60):"0"+QString::number(sec/60);
-//QString secs=sec%60>=10?QString::number(sec%60):"0"+QString::number(sec%60);
-//tmpList.append("\"duration\":\""+QString(minute+":"+secs)+"\",");
-
-//if(fileInfo.size()<1024*1024)    //KB
-//    tmpList.append("\"size\":\""+QString(QString::number(fileInfo.size()/1024.0,'f',1)+"KB")+"\",");
-//else    //MB
-//    tmpList.push_back("\"size\":\""+QString(QString::number((float)fileInfo.size()/(1024*1024),'f',1)+"MB")+"\",");
-
-//                if(songList.length()==0)
-//            printf("Title:   %s\r\n", id3_info.Title);
-//            printf("Artist:  %s\r\n", id3_info.Artist);
-//            printf("Album:   %s\r\n", id3_info.Album);
-//            printf("Year:    %s\r\n", id3_info.Year);
-//            printf("Comment: %s\r\n", id3_info.Comment);
-//            printf("Genre:   %s\r\n", id3_info.Genre);
-//            printf("Track:   %s\r\n", id3_info.TrackNum);
-
-//            printf("Artist1 :  %s\r\n", id3_info.AlbumArtist );
-//            printf("Composer:  %s\r\n", id3_info.Composer );
-//            printf("Original:  %s\r\n", id3_info.OriginalArtist );
-//            printf("Copyright: %s\r\n", id3_info.Copyright );
-//            printf("URL:       %s\r\n", id3_info.URL );
-//            printf("Encoder:   %s\r\n", id3_info.Encoder );
-//            printf("Publisher: %s\r\n", id3_info.Publisher );
-//            printf("BPM:       %u\r\n", id3_info.BPM);
-//            printf("MIME:      %s\r\n", id3_info.Picture.MIMEType);
-//            printf("TYPE:      %u\r\n", id3_info.Picture.PictureType);
-//            printf("Desc:      %s\r\n", id3_info.Picture.Description);
-//printf("Size:      %u\r\n\r\n", id3_info.Picture.PictureDataSize);
 
