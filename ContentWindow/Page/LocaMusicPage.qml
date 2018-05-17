@@ -290,6 +290,10 @@ Page {
                           title: qsTr("时长")
                           width: 300
                       }
+                onDoubleClicked: {
+                    //console.log("You chose: " + localmusic.data(localmusic.index(currentRow,4)));
+                    Player.playSL(localmusic.data(localmusic.index(currentRow,4)));
+                }
             }
 
         }

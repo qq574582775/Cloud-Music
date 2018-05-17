@@ -12,7 +12,7 @@ ApplicationWindow {
     property real minHeight: 400*dp;
     id:mainwindow
     visible: true
-    width: 800*dp
+    width: 1000*dp
     height: 600*dp
     flags:Qt.FramelessWindowHint | Qt.Window;
 

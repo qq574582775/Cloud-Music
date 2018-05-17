@@ -9,22 +9,28 @@ Player::Player(QObject *parent) : QObject(parent)
 
 void Player::playSL(QString path)
 {
-    qDebug() << path;
-    m_player.setMedia(QUrl::fromLocalFile("f:\\music\\bigbang-if you.mp3"));
-    m_player.setVolume(30);
+    m_player.setMedia(QUrl::fromLocalFile(path));
+    //m_player.setVolume(30);
     m_player.play();
+    auto name = path.mid(path.lastIndexOf('/')+1);
+    name.chop(4);
+    emit musicChanged(name);
 }
 
 void Player::positionChanged(qint64 milliseconds)
 {
-    int sec = milliseconds/1000;
-    qDebug() << sec/60<< ":" << sec%60;
+    currentPosition =  milliseconds/1000;
+    QString cur = QString("%1:%2").arg(currentPosition/60,2,10,QChar('0')).arg(currentPosition%60,2,10,QChar('0'));
+    QString total = QString("%1 : %2").arg(m_currentTotalTime/60,2,10,QChar('0')).arg(m_currentTotalTime%60,2,10,QChar('0'));
+    //qDebug() << "TotalTime: " << m_currentTotalTime/60 << m_currentTotalTime%60;
+    emit currentPositionChanged(QString("%1  :  %2").arg(cur).arg(total));
 }
 
 void Player::durationChanged(qint64 milliseconds)
 {
     m_currentTotalTime = milliseconds/1000;
-    qDebug() << "TotalTime: " << m_currentTotalTime/60 << m_currentTotalTime%60;
+    //qDebug() << "TotalTime: " << m_currentTotalTime/60 << m_currentTotalTime%60;
+    emit updateTotalTime(m_currentTotalTime);
 }
 
 

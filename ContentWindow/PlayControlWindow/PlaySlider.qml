@@ -6,7 +6,12 @@ import QtQuick.Layouts 1.3
 
 
 Rectangle{
-    property bool nolabel: true
+    property bool nolabel: true;
+    property int duringTime:0;
+    property alias musicName: songInfo.text;
+    property alias musicDuringText: songTimeInfo.text;
+    property alias currentPositionValue: sliderControl.value;
+
     Slider {
         id: sliderControl;
         z:1
@@ -15,6 +20,9 @@ Rectangle{
         anchors.top:parent.top
         anchors.topMargin: parent.height/9*2
         anchors.bottom: parent.bottom
+        from: 0
+        value: 0
+        to: 100
 
 
         background: Rectangle {
@@ -87,7 +95,7 @@ Rectangle{
     Label{
         id:songInfo
         visible: nolabel
-        text: "if you - bigbang"
+        //text: "if you - bigbang"
         anchors{
             left: sliderControl.left
             leftMargin: 3*dp
@@ -100,7 +108,7 @@ Rectangle{
 
         font{
             family: "Microsoft YaHei";
-            pixelSize: 14;
+            pixelSize: 13;
             bold: false;
         }
         color: "#777777"
@@ -109,7 +117,7 @@ Rectangle{
     Label{
         id:songTimeInfo
         visible: nolabel
-        text: "01:12 : 03:30"
+        //text: "01:12 : 03:30"
         width: 60*dp
         anchors{
             right : sliderControl.right

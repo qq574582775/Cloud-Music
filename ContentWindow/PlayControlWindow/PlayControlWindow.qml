@@ -61,6 +61,7 @@ Rectangle{
 
 
     PlaySlider{
+        id:sliderWindow
         anchors{
             left: stepForward.right
             leftMargin: 10*dp
@@ -70,6 +71,25 @@ Rectangle{
             topMargin: 1*dp
             bottom: parent.bottom
             bottomMargin: 1*dp
+        }
+        function totalTime(time_){
+            //console.log("totalTime: "+time_);
+            sliderWindow.duringTime = time_;
+        }
+        function setCurrentMusic(musicName){
+            //console.log("CurrentMusic: "+musicName);
+            sliderWindow.musicName = musicName;
+        }
+        function setPosition(position_){
+            sliderWindow.musicDuringText = position_;
+            //console.log(Player.currentPosition);
+            sliderWindow.currentPositionValue = (Player.currentPosition*100/sliderWindow.duringTime);
+        }
+
+        Component.onCompleted: {
+            Player.updateTotalTime.connect(totalTime);
+            Player.currentPositionChanged.connect(setPosition);
+            Player.musicChanged.connect(setCurrentMusic);
         }
     }
 

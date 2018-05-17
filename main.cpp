@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "localmusicmodel.h"
+#include "player.h"
 
 #include <QStandardPaths>
 #include <QSqlDatabase>
@@ -40,10 +42,15 @@ int main(int argc, char *argv[])
     //qmlRegisterType<Player>("qt.Player", 1, 0, "Player");
 
     QGuiApplication app(argc, argv);
-    qmlRegisterType<LocalMusicModel>("io.qt.CloudMusic", 1, 0, "LocalMusicModel");
-
     connectToDatabase();
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<LocalMusicModel>("io.qt.CloudMusic", 1, 0, "LocalMusicModel");
+    Player mPlayer;
+    engine.rootContext()->setContextProperty("Player",&mPlayer);
+
+
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
