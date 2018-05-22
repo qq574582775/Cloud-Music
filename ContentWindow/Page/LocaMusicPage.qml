@@ -36,7 +36,7 @@ Page {
             y: 37
             width: 47
             height: 20
-            text: qsTr("0首音乐，")
+            text: localmusic.m_musicNum + qsTr("首音乐，")
             font.pixelSize: 14
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -63,6 +63,7 @@ Page {
             MouseArea{
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
+                onClicked: selecttMusicDirDlg.open();
             }
         }
 
