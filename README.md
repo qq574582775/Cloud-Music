@@ -6,3 +6,4 @@ Qt 5.9.4
 ![2](/snapshot/3.gif)
 ![3](/snapshot/LocalMusicUI.gif)
 ![4](/snapshot/4.gif)
+![5](/snapshot/5.gif)
